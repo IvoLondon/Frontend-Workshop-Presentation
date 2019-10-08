@@ -23,6 +23,11 @@ const images = {
   formidagon: require('../assets/formidable-logo.svg'),
   goodWork: require('../assets/good-work.gif'),
   bulb: require('../assets/bulb.png'),
+
+  gitlensStash: require('../assets/gitlens-stash.gif'),
+  gitlensHistory: require('../assets/gitlens-fileHistory.gif'),
+  gitlensCompare: require('../assets/gitlens-compare.gif'),
+
   commits: require('../assets/commits.png'),
   chromeExtension: require('../assets/accessibility-for-web.png'),
   chromeExtensionOptionsMain: require('../assets/accessibility-for-web-options-main.png'),
@@ -47,6 +52,26 @@ const theme = createTheme(
   }
 );
 
+
+const gitLens = [
+  ['Stash list', images.gitlensStash],
+  ['File & Line History', images.gitlensHistory],
+  ['Compare', images.gitlensCompare],
+];
+const gitLensSlides = gitLens.map((slide) => {
+  return (
+    <Slide key={slide[0]} bgColor="primary">
+      <Text margin="10px 0 0" textSize="24px" textColor="tertiary">
+        GitLens
+      </Text>
+      <Heading size={1} textSize="30px" caps lineHeight={1} textColor="tertiary">
+        {slide[0]}
+      </Heading>
+      <Image src={slide[1]} width="100%" />
+    </Slide>
+  );
+});
+
 const semanticMessages = {
   feat: '(new feature for the user, not a new feature for build script)',
   fix: '(bug fix for the user, not a fix to a build script)',
@@ -65,8 +90,8 @@ const listSemanticMessages = Object.keys(semanticMessages).map((key, index) => {
         {semanticMessages[key]}
       </Text>
     </ListItem>
-  )
-})
+  );
+});
 
 export default class Presentation extends React.Component {
   render() {
@@ -87,7 +112,7 @@ export default class Presentation extends React.Component {
             A place to discuss frontend.
           </Text>
         </Slide>
-
+        {gitLensSlides}
         <Slide bgColor="primary">
           <Heading size={5} fit caps lineHeight={1} textColor="tertiary">
             Semantic Commit Messages
